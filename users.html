@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - Database Interaction</title>
+    <link rel="stylesheet" href="../social_media_campaigns/css/users.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="information.html">Information</a></li>
+            <li><a href="apps.html">Popular Apps</a></li>
+            <li><a href="parents.html">How Parents Can Help</a></li>
+            <li><a href="livestreaming.html">Livestreaming</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="legislation.html">Legislation</a></li>
+            <li><a href="users.html" class="active">Users</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Safety Tips</a>
+                <div class="dropdown-content">
+                    <a href="#">Use strong passwords</a>
+                    <a href="#">Enable two-factor authentication</a>
+                    <a href="#">Be cautious of what you share</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Create New User</h2>
+        <form id="form" action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit" id="submit">Add User</button>
+        </form>
+
+        <h2>Users</h2>
+        <table id="records">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="recordBody">
+                <!-- Table rows will be populated dynamically from JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

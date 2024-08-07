@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Campaigns - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="custom-cursor">
+    <header>
+        <h1>Welcome to Social Media Campaigns</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="information.html">Information</a></li>
+                <li><a href="apps.html">Popular Apps</a></li>
+                <li><a href="parents.html">How Parents Can Help</a></li>
+                <li><a href="livestreaming.html">Livestreaming</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="legislation.html">Legislation</a></li>
+                <li><a href="users.html">Users</a></li>
+                <li class="dropdown">
+                    <button class="dropbtn" id="dropdownBtn">Safety Tips</button>
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="#">Use strong passwords</a>
+                        <a href="#">Enable two-factor authentication</a>
+                        <a href="#">Be cautious of what you share</a>
+                        <!-- Add more safety tips as needed -->
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Stay Safe on Social Media</h2>
+            <p>Learn how to stay safe on your favorite social media apps.</p>
+            <hr class="horizontal-rule">
+            <div>
+                <input type="text" id="search" placeholder="Search...">
+                <button type="button">Search</button>
+            </div>
+            <hr class="horizontal-rule">
+            <h1>web-services</h1>
+            <div class="web-services">
+                <div id="service1" class="slideshow-container">
+                    <div class="mySlides">
+                        <p>Weather Forecast:</p>
+                        <pre id="service1-data">Loading...</pre>
+                    </div>
+                    <div class="prev" onclick="plusSlides(-1)">&#10094;</div>
+                    <div class="next" onclick="plusSlides(1)">&#10095;</div>
+                </div>
+                <div id="service2" class="slideshow-container">
+                    <div class="mySlides">
+                        <p>Funny Tweets:</p>
+                        <pre id="service2-data">Loading...</pre>
+                    </div>
+                    <div class="prev" onclick="plusSlides2(-1)">&#10094;</div>
+                    <div class="next" onclick="plusSlides2(1)">&#10095;</div>
+                </div>
+            </div>
+            <hr class="horizontal-rule">
+            <div class="visuals">
+                <h3>Popular Apps</h3>
+                <ul>
+                    <li>Facebook</li>
+                    <li>Instagram</li>
+                    <li>Snapchat</li>
+                    <!-- More apps -->
+                </ul>
+                <div class="how-to-stay-safe">
+                    <h3>How to Stay Safe Online</h3>
+                    <p>Follow these tips to ensure your online safety:</p>
+                    <ul>
+                        <li>Use strong passwords</li>
+                        <li>Enable two-factor authentication</li>
+                        <li>Be cautious of what you share</li>
+                        <!-- More tips -->
+                    </ul>
+                </div>
+                <div class="illustrations">
+                    <h3>3D Illustrations</h3>
+                    <img src="../social_media_campaigns/images/3d_illustration_1.jpg" alt="3D Illustration 1">
+                    <img src="../social_media_campaigns/images/3d_illustration_2.jpg" alt="3D Illustration 2">
+                    <!-- Add more 3D illustrations as needed -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Social Media Campaigns Ltd. All rights reserved.</p>
+        <p>You are here: Home</p>
+        <div class="social-media-buttons">
+            <a href="#"><img src="../social_media_campaigns/images/facebbok.png" alt="Facebook"></a>
+            <a href="#"><img src="../social_media_campaigns/images/twitter_icon.png" alt="Twitter"></a>
+            <a href="#"><img src="../social_media_campaigns/images/instagram_icon.png" alt="Instagram"></a>
+            <!-- Add more social media buttons as needed -->
+        </div>
+    </footer>
+
+    <script>
+        async function fetchWeatherForecast() {
+            const url = 'https://weatherbit-v1-mashape.p.rapidapi.com/forecast/3hourly?lat=35.5&lon=-78.5&units=imperial&lang=en';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': '726b506b57mshc7cad42764ab75ap1e65b6jsnfddc5b7876aa',
+                    'x-rapidapi-host': 'weatherbit-v1-mashape.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                const forecast = `Country: ${result.country_code}\nWeather Condition: ${result.data[0].weather.description}`;
+                document.getElementById('service1-data').innerText = forecast;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('service1-data').innerText = 'Error fetching data';
+            }
+        }
+
+        async function fetchFunnyTweets() {
+            const url = 'https://twitter154.p.rapidapi.com/search/search/continuation?query=%23funny&section=top&min_retweets=20&limit=5';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': '726b506b57mshc7cad42764ab75ap1e65b6jsnfddc5b7876aa',
+                    'x-rapidapi-host': 'twitter154.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                const tweets = result.results.map(tweet => tweet.text).join('\n\n');
+                document.getElementById('service2-data').innerText = tweets;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('service2-data').innerText = 'Error fetching data';
+            }
+        }
+
+        let slideIndex = 1;
+        let slideIndex2 = 1;
+        showSlides(slideIndex);
+        showSlides2(slideIndex2);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function plusSlides2(n) {
+            showSlides2(slideIndex2 += n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.querySelectorAll("#service1 .mySlides");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex-1].style.display = "block";
+        }
+
+        function showSlides2(n) {
+            let i;
+            let slides = document.querySelectorAll("#service2 .mySlides");
+            if (n > slides.length) {slideIndex2 = 1}
+            if (n < 1) {slideIndex2 = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex2-1].style.display = "block";
+        }
+
+        // Fetch data on page load
+        fetchWeatherForecast();
+        fetchFunnyTweets();
+
+        // JavaScript to toggle visibility of dropdown content
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownBtn = document.getElementById('dropdownBtn');
+            const dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownBtn.addEventListener('click', function() {
+                dropdownContent.classList.toggle('show');
+            });
+        });
+    </script>
+</body>
+</html>
